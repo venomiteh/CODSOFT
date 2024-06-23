@@ -2,6 +2,7 @@ package Task_5;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class REGISTRATION_SYSTEM {
@@ -13,6 +14,17 @@ public class REGISTRATION_SYSTEM {
         offerings = new ArrayList<>();
         students = new ArrayList<>();
     }
+
+    private static int getIntInput(Scanner scanner) {
+        while (true) {
+            try {
+                int input = scanner.nextInt();
+                    return input;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine();
+            }
+        }}
 
     public void addCourse(Course_Database course) {
         offerings.add(course);
@@ -106,7 +118,7 @@ public class REGISTRATION_SYSTEM {
 
         while (system.currentStudent == null) {
             System.out.println("Enter student ID:");
-            int studentID = scanner.nextInt();
+            int studentID = getIntInput(scanner);
             System.out.println("Enter password:");
             String password = scanner.next();
             system.studentLogin(studentID, password);
@@ -145,7 +157,7 @@ public class REGISTRATION_SYSTEM {
                     System.out.println("Logged out successfully.");
                     while (system.currentStudent == null) {
                         System.out.println("Enter student ID:");
-                       int studentID = scanner.nextInt();
+                       int studentID = getIntInput(scanner);
                         System.out.println("Enter password:");
                         String password = scanner.next();
                         system.studentLogin(studentID, password);
